@@ -1,7 +1,7 @@
 #include "ship.h"
 
-#include "constants.h"
 #include "util.h"
+#include "constants.h"
 
 const float Ship::acceleration = 300.0f;
 

@@ -4,7 +4,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class Ship: public sf::Drawable, public sf::Transformable
+#include "gameobject.h"
+
+class Ship: public GameObject
 {
 	static const float acceleration;
 	static const float maxSpeed;
@@ -12,10 +14,10 @@ class Ship: public sf::Drawable, public sf::Transformable
 
 public:
 	Ship();
-	~Ship();
+	~Ship() override;
 
-	void update(float frameTime);
-	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+	void update(float frameTime) override;
+	void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	void reset();
 	void onEvent(const sf::Event &event);
