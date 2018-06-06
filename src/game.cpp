@@ -67,6 +67,7 @@ void Game::update(float frameTime)
 
 	updateAsteroids(frameTime);
 	updateBullets(frameTime);
+	checkObjectCollision();
 }
 
 void Game::render(sf::RenderTarget &target)
@@ -115,6 +116,21 @@ void Game::updateBullets(float frameTime)
 		}
 		else {
 			it = bullets.erase(it);
+		}
+	}
+}
+
+void Game::checkObjectCollision()
+{
+	for (auto asteroidIt = asteroids.begin(); asteroidIt != asteroids.end(); ++asteroidIt) {
+		for (auto bulletIt = bullets.begin(); bulletIt != bullets.end(); ++bulletIt) {
+			if (bulletIt->isExist()) {
+				if (asteroidIt->collide(bulletIt->getPosition())) {
+					bulletIt->impact();
+					asteroidIt->explode()
+					break;
+				}
+			}
 		}
 	}
 }

@@ -22,6 +22,7 @@ protected:
 
 	void updateAsteroids(float frameTime);
 	void updateBullets(float frameTime);
+	void checkObjectCollision();
 	void generateBullet();
 
 private:
