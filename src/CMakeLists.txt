@@ -3,6 +3,7 @@ set(SOURCES
         gameobject.cpp
         ship.cpp
         bullet.cpp
+        game.cpp
         )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
