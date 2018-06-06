@@ -1,20 +1,28 @@
 #include <SFML/Graphics.hpp>
 
+#include "ship.h"
+#include "constants.h"
+
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	Ship ship;
+	sf::RenderWindow window(sf::VideoMode(graphics::APP_WIDTH, graphics::APP_HEIGHT), game::GAME_NAME);
+	window.setFramerateLimit(graphics::APP_FPS);
+
+	sf::Clock clock;
 
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed) {
 				window.close();
+			}
+			ship.onEvent(event);
 		}
 
 		window.clear();
-		window.draw(shape);
+		ship.update(clock.restart().asMilliseconds());
+		window.draw(ship);
 		window.display();
 	}
 
