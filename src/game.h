@@ -2,8 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <ship.h>
-#include <bullet.h>
+#include "ship.h"
+#include "bullet.h"
+#include "asteroid.h"
 
 class Game
 {
@@ -19,11 +20,13 @@ protected:
 	void render(sf::RenderTarget &target);
 	void onEvent(const sf::Event &event);
 
+	void updateAsteroids(float frameTime);
 	void updateBullets(float frameTime);
 	void generateBullet();
 
 private:
 	Ship ship;
+	std::vector<Asteroid> asteroids;
 	std::vector<Bullet> bullets;
 
 	bool shoot = false;

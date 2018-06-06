@@ -16,5 +16,7 @@ static const float DEG_TO_RAD = 3.14159f / 180.0f;
 
 namespace game
 {
+static const int NUM_OF_ASTEROIDS = 10;
+
 static const char *GAME_NAME = "GitSteroid";
 }

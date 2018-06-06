@@ -1,7 +1,7 @@
 #include "game.h"
 
-#include <constants.h>
-#include <bullet.h>
+#include "constants.h"
+#include "bullet.h"
 
 Game::Game()
 	:
@@ -10,6 +10,11 @@ Game::Game()
 
 void Game::init()
 {
+	for (int i = 0; i < game::NUM_OF_ASTEROIDS; ++i) {
+		Asteroid a;
+		asteroids.push_back(a);
+	}
+
 	createWindow();
 }
 
@@ -60,11 +65,16 @@ void Game::update(float frameTime)
 
 	ship.update(frameTime);
 
+	updateAsteroids(frameTime);
 	updateBullets(frameTime);
 }
 
 void Game::render(sf::RenderTarget &target)
 {
+	for (auto it : asteroids) {
+		target.draw(it);
+	}
+
 	target.draw(ship);
 
 	for (auto it : bullets) {
@@ -78,6 +88,20 @@ void Game::onEvent(const sf::Event &event)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		shoot = true;
+	}
+}
+
+void Game::updateAsteroids(float frameTime)
+{
+	auto asteroidIt = asteroids.begin();
+	while (asteroidIt != asteroids.end()) {
+		if (asteroidIt->isExist()) {
+			asteroidIt->update(frameTime);
+			++asteroidIt;
+		}
+		else {
+			asteroidIt = asteroids.erase(asteroidIt);
+		}
 	}
 }
 
